@@ -1,0 +1,1412 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Meterpreter BOFLoader操作指南, x1a0c">
+    <meta name="description" content="Meterpreter BOFLoader操作指南">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Meterpreter BOFLoader操作指南 | x1a0c</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">x1a0c</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">x1a0c</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Meterpreter BOFLoader操作指南</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/">
+                                <span class="chip bg-color">渗透工具</span>
+                            </a>
+                        
+                            <a href="/tags/MSF/">
+                                <span class="chip bg-color">MSF</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/" class="post-category">
+                                渗透工具
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-02-25
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-11-28
+                </div>
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Meterpreter-BOFLoader操作指南"><a href="#Meterpreter-BOFLoader操作指南" class="headerlink" title="Meterpreter BOFLoader操作指南"></a>Meterpreter BOFLoader操作指南</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>BOF (Beacon Object File)是已编译但未链接的 C 程序，允许在Beacon进程中执行并使用内部的Beacon API，采用目标文件格式。 BOF 通常较小，可以将其发送到“BOF 加载器”，后者将 BOF 加载到内存中，执行链接器操作以将外部符号映射到函数地址，然后在内存中执行 BOF 代码。 类似于反射 DLL 注入或 .NET 反射，BOF 允许操作员在运行时动态地向植入物添加功能。这允许将植入物构建得尽可能小，以将签名保持在最低限度。 Beacon 对象文件中的“Beacon”一词来自 Cobalt Strike 的 Beacon 有效负载，Beacon在接收执行obj前，Cobalt Strike会先对这个obj文件进行一些处理，比如解析obj文件中一些需要的段.text，.data，在处理一些表比如IMAGE_RELOCATION，IMAGE_SYMBOL等等，然后在经过一系列的处理后，会把需要的部分按照一定格式打包起来随后在发送给Beacon，这时Beacon接收到的是Cobalt Strike已经解析处理过的obj文件数据，并非是原本的obj文件，所以Beacon主要做的是必须是在进程内才能确定并完成的事情比如处理重定位，填充函数指针等等，最后去执行go入口点。这是一个使用 BOF 加载程序发布的公共 C2。在这篇博文中，我们将专注于使用 BOF，但也有用于开发 BOF 的大量资源。</p>
+<h2 id="前置操作"><a href="#前置操作" class="headerlink" title="前置操作"></a>前置操作</h2><p>Meterpreter 已经有关于 BOFLoader 的优秀文档，但有时最好查看示例用法并从那里向后工作。在执行我们的第一个 BOF 之前，首先，我们需要一个 C 编译器，例如 mingw-gcc。然后，我们需要从GitHub上拉取<code>git clone https://github.com/trustedsec/CS-Situational-Awareness-BOF.git</code>最后使用提供的 make_all.sh 脚本来编译每个 BOF</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230219200851792.png)</p>
+<p><code>cd CS-Situational-Awareness-BOF</code>进入CS-Situational-Awareness-BOF文件夹中<code>sudo ./make_all.sh</code>进行编译</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230219201414864.png)</p>
+<p>运行 make_all.sh 脚本后，会编译在src&#x2F;SA下所有的以命令命名的文件夹下的.c文件，编译完成后通过<code>ls SA/*/*.o</code>来查看x86 和 x64 架构的Object (.o) 文件应该出现在它们各自的文件夹中，准备工作到这里就完成了，我们可以通过Meterprete加载bofloader后执行所有的.o文件。</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230219202010667.png)</p>
+<h2 id="Meterpreter加载bofloader"><a href="#Meterpreter加载bofloader" class="headerlink" title="Meterpreter加载bofloader"></a>Meterpreter加载bofloader</h2><p>在 Meterpreter 中执行这些 BOF 之前的最后一步是加载 bofloader 扩展。目前，bofloader 扩展仅在 Windows x86 和 x64 Meterpreter 负载上受支持。要加载 BOFLoader，只需使用 Meterpreter 的加载 bofloader 命令，在一个会话中执行<code>load bofloader</code>加载BOFLoader。</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230219202629270.png)</p>
+<p>加载成功后， bofloader 扩展会暴露 execute_bof，这是用于执行 BOF 的 Meterpreter 命令。对于简单的 BOF，语法只是 execute_bof &lt;path&#x2F;to&#x2F;object_file.o&gt;。下面显示了运行 whoami BOF 的示例。<code>execute_bof /home/kali/Desktop/CS-Situational-Awareness-BOF/SA/whoami/whoami.x64.o</code>此命令将 whoami.x64.o 程序发送到 Meterpreter，执行它，然后将其输出返回到屏幕。</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230219205231739.png)</p>
+<p>每一个BOF文件都会生成x86和x64两个框架的.o文件，如果BOF 的架构与 Meterpreter 会话的架构不匹配，Metasploit 将拒绝执行它。就其本质而言，BOF 是内存不安全的。运行每个 BOF 时必须特别小心，以确保 BOF 不会崩溃。故障 BOF 中的崩溃也会导致主机 Meterpreter 进程崩溃。在目标主机上执行之前，请确保在测试系统上测试每个 BOF。</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230220140840159.png)</p>
+<p>同时也可以编写 BOF 以获取参数，例如文件路径或进程 ID。普通命令行参数和 BOF 参数之间的最大区别是每个参数必须有一个类型。只有 5 种类型的参数可以作为参数传递给 BOF：</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230219212056966.png)</p>
+<p>BOF 作者通常使用预定义的长度和参数顺序编写他们的 BOF。列出目录内容的 dir BOF 具有 Zs 的参数签名。第一个参数是 Z，一个宽的 UTF-16 字符串，第二个参数是 s，一个短的 16 位整数。这些参数对应于要列出的目录路径和指示是否执行递归列表的二进制标志（0 或 1）。要执行 C: 驱动器的标准目录列表，请使用以下命令：<code>execute_bof /home/kali/Desktop/CS-Situational-Awareness-BOF/SA/dir/dir.x64.o --format-string Zs C:\\ 0</code>此时屏幕上返回了C盘下的目录。</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230219212631985.png)</p>
+<p>重要的是要注意 BOF 需要正确的参数名，如果没有正确指定参数，那么 BOF 可能会崩溃。 Metasploit 会尝试检查指定参数是否有效，但 Metasploit 无法保证此信息。最终，由BOF编写者来确保这些信息是正确的。</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230220142103052.png)</p>
+<p>我们可以在CS-Situational-Awareness-BOF&#x2F;SA的目录下查看其他编译好的Object(.o)文件。</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230219213426879.png)</p>
+<p>各命令所需要的参数和作用参考下表。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>参数</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>adcs_enum</td>
+<td>adcs_enum</td>
+<td>使用 Win32 函数枚举 AD 中的 CA 和模板</td>
+</tr>
+<tr>
+<td>adcs_enum_com</td>
+<td>adcs_enum_com</td>
+<td>使用 ICertConfig COM 对象枚举 AD 中的 CA 和模板</td>
+</tr>
+<tr>
+<td>adcs_enum_com2</td>
+<td>adcs_enum_com2</td>
+<td>使用 IX509PolicyServerListManager COM 对象枚举 AD 中的 CA 和模板</td>
+</tr>
+<tr>
+<td>adv_audit_policies</td>
+<td>adv_audit_policies</td>
+<td>检索高级安全审核策略</td>
+</tr>
+<tr>
+<td>arp</td>
+<td>arp</td>
+<td>列出 ARP 表</td>
+</tr>
+<tr>
+<td>cacls</td>
+<td>cacls [filepath]</td>
+<td>列出指定文件的用户权限，支持通配符</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>dir [directory] [&#x2F;s]</td>
+<td>列出目录中的文件。支持通配符（例如“C:\Windows\S*”）CobaltStrike ls 命令</td>
+</tr>
+<tr>
+<td>driversigs</td>
+<td>driversigs</td>
+<td>枚举已安装的服务图像路径以根据已知的 AV&#x2F;EDR 供应商检查签名证书</td>
+</tr>
+<tr>
+<td>enum_filter_driver</td>
+<td>enum_filter_driver [opt:computer]</td>
+<td>枚举过滤器驱动程序</td>
+</tr>
+<tr>
+<td>enumLocalSessions</td>
+<td>enumLocalSessions</td>
+<td>枚举当前连接的本地和 RDP 用户会话</td>
+</tr>
+<tr>
+<td>env</td>
+<td>env</td>
+<td>列出进程环境变量</td>
+</tr>
+<tr>
+<td>findLoadedModule</td>
+<td>findLoadedModule [modulepart] [opt:procnamepart]</td>
+<td>查找 <em>modulepart</em> 加载到哪些进程，可选择仅搜索 <em>procnamepart</em></td>
+</tr>
+<tr>
+<td>get_password_policy</td>
+<td>get_password_policy [hostname]</td>
+<td>获取目标服务器或域的配置密码策略和锁定</td>
+</tr>
+<tr>
+<td>ipconfig</td>
+<td>ipconfig</td>
+<td>列出 IPv4 地址、主机名和 DNS 服务器</td>
+</tr>
+<tr>
+<td>ldapsearch</td>
+<td>ldapsearch [query] [opt: attribute] [opt: results_limit] [opt: DC hostname or IP] [opt: Distingished Name]</td>
+<td>执行 LDAP 搜索（注意：如果您想要对象的所有属性 + base64 编码的 ACL，请指定 *,ntsecuritydescriptor 作为属性参数，然后可以使用 BOFHound 解决这个问题。可能会破坏分页，尽管在测试期间一切似乎都很好。）</td>
+</tr>
+<tr>
+<td>listdns</td>
+<td>listdns</td>
+<td>列出 DNS 缓存条目。尝试查询和解析每个</td>
+</tr>
+<tr>
+<td>list_firewall_rules</td>
+<td>list_firewall_rules</td>
+<td>列出 Windows 防火墙规则</td>
+</tr>
+<tr>
+<td>listmods</td>
+<td>listmods [opt: pid]</td>
+<td>列出进程模块 (DLL)。如果 PID 为空，则目标当前进程。补充 driversigs 以确定我们的进程是否被 AV&#x2F;EDR 注入</td>
+</tr>
+<tr>
+<td>listpipes</td>
+<td>listpipes</td>
+<td>列出命名管道</td>
+</tr>
+<tr>
+<td>locale</td>
+<td>locale</td>
+<td>列出系统区域设置语言、区域设置 ID、日期、时间和国家&#x2F;地区</td>
+</tr>
+<tr>
+<td>netGroupList</td>
+<td>netGroupList [opt: domain]</td>
+<td>列出默认或指定域中的组</td>
+</tr>
+<tr>
+<td>netGroupListMembers</td>
+<td>netGroupListMembers [groupname] [opt: domain]</td>
+<td>列出来自默认域或指定域的组成员</td>
+</tr>
+<tr>
+<td>netLocalGroupList</td>
+<td>netLocalGroupList [opt: server]</td>
+<td>列出来自本地或指定计算机的本地组</td>
+</tr>
+<tr>
+<td>netLocalGroupListMembers</td>
+<td>netLocalGroupListMembers [groupname] [opt: server]</td>
+<td>列出来自本地或指定计算机的本地组</td>
+</tr>
+<tr>
+<td>netloggedon</td>
+<td>netloggedon [hostname]</td>
+<td>返回登录本地或远程计算机的用户</td>
+</tr>
+<tr>
+<td>netsession</td>
+<td>netsession [opt:computer]</td>
+<td>枚举本地或指定计算机上的会话</td>
+</tr>
+<tr>
+<td>netshares</td>
+<td>netshares [hostname]</td>
+<td>列出本地或远程计算机上的共享</td>
+</tr>
+<tr>
+<td>netstat</td>
+<td>netstat</td>
+<td>TCP 和 UDP IPv4 列表端口</td>
+</tr>
+<tr>
+<td>netuptime</td>
+<td>netuptime [hostname]</td>
+<td>返回有关本地或远程计算机上启动时间的信息</td>
+</tr>
+<tr>
+<td>netuser</td>
+<td>netuser [username] [opt: domain]</td>
+<td>获取有关特定用户的信息。如果指定了域名，则从域中拉取</td>
+</tr>
+<tr>
+<td>netuse_add</td>
+<td>netuse_add [sharename] [opt:username] [opt:password] [opt:&#x2F;DEVICE:devicename] [opt:&#x2F;PERSIST] [opt:&#x2F;REQUIREPRIVACY]</td>
+<td>将新连接绑定到远程计算机</td>
+</tr>
+<tr>
+<td>netuse_delete</td>
+<td>netuse_delete [device||sharename] [opt:&#x2F;PERSIST] [opt:&#x2F;FORCE]</td>
+<td>删除绑定的设备&#x2F;共享名</td>
+</tr>
+<tr>
+<td>netuse_list</td>
+<td>netuse_list [opt:target]</td>
+<td>列出所有绑定的共享资源或有关目标本地资源的信息</td>
+</tr>
+<tr>
+<td>netview</td>
+<td>netview</td>
+<td>列出当前域中可访问的计算机</td>
+</tr>
+<tr>
+<td>nslookup</td>
+<td>nslookup [hostname] [opt:dns server] [opt: record type]</td>
+<td>进行 DNS 查询。 DNS服务器是你要查询的服务器（不指定或默认为0） 记录类型类似于 A、AAAA 或 ANY。由于观察到的崩溃，某些情况受到限制</td>
+</tr>
+<tr>
+<td>probe</td>
+<td>probe [host] [port]</td>
+<td>检查特定端口是否打开</td>
+</tr>
+<tr>
+<td>reg_query</td>
+<td>[opt:hostname] [hive] [path] [opt: value to query]</td>
+<td>查询注册表值或枚举单个键</td>
+</tr>
+<tr>
+<td>reg_query_recursive</td>
+<td>[opt:hostname] [hive] [path]</td>
+<td>递归枚举从路径开始的键</td>
+</tr>
+<tr>
+<td>resources</td>
+<td>resources</td>
+<td>列出主硬盘驱动器上的内存使用情况和可用磁盘空间</td>
+</tr>
+<tr>
+<td>routeprint</td>
+<td>routeprint</td>
+<td>列出 IPv4 路由</td>
+</tr>
+<tr>
+<td>sc_enum</td>
+<td>sc_enum [opt:server]</td>
+<td>枚举 qc、query、qfailure 和 qtriggers 信息的服务</td>
+</tr>
+<tr>
+<td>sc_qc</td>
+<td>sc_qc [service name] [opt:server]</td>
+<td>BOF中执行sc_qc</td>
+</tr>
+<tr>
+<td>sc_qdescription</td>
+<td>sc_qdescription [service name] [opt: server]</td>
+<td>BOF 中执行sc_qdescription</td>
+</tr>
+<tr>
+<td>sc_qfailure</td>
+<td>sc_qfailure [service name] [opt:server]</td>
+<td>查询服务的失败条件</td>
+</tr>
+<tr>
+<td>sc_qtriggerinfo</td>
+<td>sc_qtriggerinfo [service name] [opt:server]</td>
+<td>查询服务的触发条件</td>
+</tr>
+<tr>
+<td>sc_query</td>
+<td>sc_query [opt: service name] [opt: server]</td>
+<td>BOF中执行sc_query</td>
+</tr>
+<tr>
+<td>schtasksenum</td>
+<td>schtasksenum [opt: server]</td>
+<td>枚举本地或远程计算机上的计划任务</td>
+</tr>
+<tr>
+<td>schtasksquery</td>
+<td>schtasksquery [opt: server] [taskpath]</td>
+<td>在本地或远程计算机上查询给定任务</td>
+</tr>
+<tr>
+<td>tasklist</td>
+<td>tasklist [opt: server]</td>
+<td>列出正在运行的进程，包括 PID、PPID 和 ComandLine（使用 wmi）</td>
+</tr>
+<tr>
+<td>uptime</td>
+<td>uptime</td>
+<td>列出系统启动时间和运行时间</td>
+</tr>
+<tr>
+<td>vssenum</td>
+<td>vssenum [hostname] [opt:sharename]</td>
+<td>在某些 Server 2012+ 服务器上枚举卷影副本</td>
+</tr>
+<tr>
+<td>whoami</td>
+<td>whoami</td>
+<td>列出 whoami &#x2F;all</td>
+</tr>
+<tr>
+<td>windowlist</td>
+<td>windowlist [opt:all]</td>
+<td>列出当前用户会话中的可见窗口</td>
+</tr>
+<tr>
+<td>wmi_query</td>
+<td>wmi_query query [opt: server] [opt: namespace]</td>
+<td>运行 wmi 查询并以 CSV 格式显示结果</td>
+</tr>
+</tbody></table>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我们从GitHub上拉取的BOF文件成功编译之后，通过Meterpreter的BOFLoader模块，成功的发送命令到Beacon的进程当中，并且执行了命令。BOF运行在Beacon会话的进程中并执行，在被加载和使用的过程中，因为是在Beacon进程内部，不会重新的创建进程，也与位置无关，这样就更加隐蔽也可以有效的规避EDR。我们在msf上观察Bof与直接执行命令的区别，首先我们先去拿到会话的pid</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230222204425149.png)</p>
+<p>然后在靶机上打开进程监控找到pid为7712的进程</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230222204823159.png)</p>
+<p>确认该进程是反弹shell的进程之后，我们在msf当中去执行命令</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230222204851431.png)</p>
+<p>当我们在msf当中执行完命令之后去进程监控中看</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230222204938054.png)</p>
+<p>可以看出开启了cmd.exe,然后我们用BofLoader在去试一遍</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230222205412997.png)</p>
+<p>因为我们的反弹shell用的是32位的所以bof这也要选择32位</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230222205933693.png)</p>
+<p>执行之后成功返回结果</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230222210027399.png)</p>
+<p>可以看出并没有新的进程出现，因为Bof在内存直接执行并不需要通过创建一个新的cmd.exe。在开启360的情况下尝试</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230222211353256.png)</p>
+<p>被360查杀到了，大致可以理解为在内存中反弹shell创建了一个cmd.exe的新进程去执行了我们的命令。</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230222212637865.png)</p>
+<p>但是BofLoader，确实通过obj文件在内存中直接执行命令，并不会产生新的进程。</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230222212750958.png)</p>
+<p>我们可以看看Cobalt Strike执行命令的过程中产生的进程，</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230223144038495.png)</p>
+<p>Cobalt Strike很多操作都是通过fork&amp;&amp;run，会创建一个rundll32.exe的进程，我们可以通过这个进程去把shellcode或者命令注入到改进程当中，但是很多杀软对于这种进程注入的行为进行了监控，例如360的晶核，为了规避监控，我们可以通过BofLoader在内存中直接执行。</p>
+<p>![](Meterpreter BOFLoader操作指南&#x2F;image-20230223144937559.png)</p>
+<p>以上我们对于BofLoader的优势有了一个了解，首先BofLoader在内存当中直接执行并不会有文件落地，其次通信过程中因为是经过Cobalt Strike加载过后的Obj文件特征值不明显，最后在执行命令方面通过在内存当中直接执行，并不会被检测出行为异常。目前只用到了BofLoader来执行简单的命令，但是BofLoader是否还可以有别的可能性，例如从用户权限的进程通过进程注入到系统权限的进程进行一个提权，或者是在域内对域管理员身份开启的进程进行获取SID和NTML hash值从而完成域内提权。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.trustedsec.com/blog/operators-guide-to-the-meterpreter-bofloader/">https://www.trustedsec.com/blog/operators-guide-to-the-meterpreter-bofloader/</a></li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">x1a0c</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://x1a0c.github.io/2023/02/25/Meterpreter%20BOFLoader%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/">https://x1a0c.github.io/2023/02/25/Meterpreter%20BOFLoader%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">x1a0c</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/">
+                                    <span class="chip bg-color">渗透工具</span>
+                                </a>
+                            
+                                <a href="/tags/MSF/">
+                                    <span class="chip bg-color">MSF</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/03/18/stack%20overflow/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="栈溢出">
+                        
+                        <span class="card-title">栈溢出</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            栈溢出
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-18
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" class="post-category">
+                                    代码审计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6/">
+                        <span class="chip bg-color">二进制</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%A0%88%E6%BA%A2%E5%87%BA/">
+                        <span class="chip bg-color">栈溢出</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/11/20/CVE-2017-10271/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="尝试远程调试WebLogic">
+                        
+                        <span class="card-title">尝试远程调试WebLogic</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            尝试远程调试CVE-2017-10271
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" class="post-category">
+                                    代码审计
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">
+                        <span class="chip bg-color">代码审计</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/">
+                        <span class="chip bg-color">远程调试</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            <a href="/about" target="_blank">x1a0c</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
